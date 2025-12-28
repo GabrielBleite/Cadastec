@@ -1,5 +1,4 @@
 import * as THREE from "./utils/threeLoader.js";
-import { OrbitControls } from "./utils/threeLoader.js";
 import { CaseRegistry } from "./cases/CaseRegistry.js";
 import { CaseBuilder } from "./scene/CaseBuilder.js";
 import { SmokeMachine } from "./scene/SmokeMachine.js";
@@ -20,7 +19,7 @@ scene.background = new THREE.Color("#0a0d14");
 const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 20);
 camera.position.set(1.4, 0.7, 1.6);
 
-const controls = new OrbitControls(camera, renderer.domElement);
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.target.set(0, 0.15, 0);
 controls.enableDamping = true;
 controls.enablePan = true;
