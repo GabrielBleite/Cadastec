@@ -55,6 +55,8 @@ ui.callbacks.onNegative = () => applyPreset("negative");
 ui.callbacks.onRecommended = () => applyPreset("balanced");
 ui.callbacks.onSmokeToggle = (state) => toggleSmoke(state);
 
+let lastTime = performance.now();
+
 init();
 
 function init() {
@@ -160,7 +162,6 @@ function onResize() {
   renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
-let lastTime = performance.now();
 function animate() {
   requestAnimationFrame(animate);
   const now = performance.now();
