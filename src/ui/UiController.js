@@ -55,7 +55,7 @@ export class UiController {
     });
 
     const smokeBtn = document.createElement("button");
-    smokeBtn.textContent = "Fumaça: LIGAR";
+    smokeBtn.textContent = "Fumaça: DESLIGAR";
     smokeBtn.addEventListener("click", () => {
       const next = smokeBtn.dataset.state !== "on";
       smokeBtn.dataset.state = next ? "on" : "off";

@@ -4,7 +4,7 @@ import { CaseBuilder } from "./scene/CaseBuilder.js";
 import { SmokeMachine } from "./scene/SmokeMachine.js";
 import { ParticleSystem } from "./sim/ParticleSystem.js";
 import { UiController } from "./ui/UiController.js";
-import { FAN_STATE, CASE_REFERENCE } from "./utils/constants.js";
+import { FAN_STATE, CASE_REFERENCE, FAN_SPIN } from "./utils/constants.js";
 
 const canvas = document.getElementById("app");
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
@@ -170,7 +170,8 @@ function animate() {
 
   particles?.update(dt);
   caseBuilder?.fans.forEach((fan) => {
-    fan.rotation.z += 0.02;
+    const spin = FAN_SPIN[fan.state] ?? 0;
+    fan.rotation.z += spin * dt * 60;
   });
 
   controls.update();

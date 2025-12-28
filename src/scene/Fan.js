@@ -22,21 +22,25 @@ export class Fan extends THREE.Group {
   build() {
     const frameGeo = new THREE.BoxGeometry(0.12, 0.02, 0.12);
     const frameMat = new THREE.MeshStandardMaterial({
-      color: 0x1d2738,
-      metalness: 0.3,
-      roughness: 0.65,
+      color: 0x141c2c,
+      metalness: 0.45,
+      roughness: 0.5,
+      emissive: new THREE.Color(0x0a0c14),
+      emissiveIntensity: 0.2,
     });
     const frame = new THREE.Mesh(frameGeo, frameMat);
     frame.castShadow = true;
     frame.receiveShadow = true;
 
     const bladesGeo = new THREE.ConeGeometry(0.05, fanThickness, 5, 1);
-    const bladesMat = new THREE.MeshStandardMaterial({
-      color: 0x9fb4ce,
-      metalness: 0.4,
-      roughness: 0.35,
+    const bladesMat = new THREE.MeshPhysicalMaterial({
+      color: 0xd8e6ff,
+      metalness: 0.35,
+      roughness: 0.15,
       transparent: true,
-      opacity: 0.85,
+      opacity: 0.9,
+      transmission: 0.25,
+      clearcoat: 0.45,
     });
     this.blades = new THREE.Mesh(bladesGeo, bladesMat);
     this.blades.position.z = fanThickness * 0.35;

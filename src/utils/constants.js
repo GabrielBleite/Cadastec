@@ -27,3 +27,8 @@ export const FAN_INFLUENCE_RADIUS = 0.14;
 export const FAN_PUSH = 1.8;
 export const CASE_WALL_THICKNESS = 0.01;
 export const FAN_OPENING_RADIUS = 0.06;
+export const FAN_SPIN = {
+  [FAN_STATE.INTAKE]: 0.16,
+  [FAN_STATE.EXHAUST]: -0.16,
+  [FAN_STATE.OFF]: 0,
+};

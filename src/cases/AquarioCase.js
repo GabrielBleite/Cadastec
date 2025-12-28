@@ -16,21 +16,24 @@ const makeFan = (id, position, normal, defaultState) => ({
   defaultState,
 });
 
-const topY = height / 2 - wall * 1.5;
-const bottomY = -height / 2 + wall * 1.5;
-const rightX = width / 2 - wall * 1.6;
-const leftX = -width / 2 + wall * 2;
-const backZ = -depth / 2 + wall * 1.4;
+const topY = height / 2 - wall * 1.3;
+const bottomY = -height / 2 + wall * 1.3;
+const rightX = width / 2 - wall * 1.4;
+const leftX = -width / 2 + wall * 1.7;
+const backZ = -depth / 2 + wall * 1.2;
+const frontZ = depth / 2 - wall * 1.2;
 
 const horizontalOffsets = [-0.14, 0, 0.14];
 const verticalOffsets = [-0.14, 0, 0.14];
+const sideZ = frontZ - 0.08;
+const roofZ = 0.08;
 
 const fanSlots = [
   // Bottom intake (row X)
   ...horizontalOffsets.map((x, index) =>
     makeFan(
       `Bottom-${index + 1}`,
-      new THREE.Vector3(x, bottomY, 0.05),
+      new THREE.Vector3(x, bottomY, 0.02),
       new THREE.Vector3(0, -1, 0),
       FAN_STATE.INTAKE,
     ),
@@ -39,7 +42,7 @@ const fanSlots = [
   ...verticalOffsets.map((y, index) =>
     makeFan(
       `Side-${index + 1}`,
-      new THREE.Vector3(rightX, y, 0.05),
+      new THREE.Vector3(rightX, y, sideZ),
       new THREE.Vector3(1, 0, 0),
       FAN_STATE.INTAKE,
     ),
@@ -48,7 +51,7 @@ const fanSlots = [
   ...horizontalOffsets.map((x, index) =>
     makeFan(
       `Top-${index + 1}`,
-      new THREE.Vector3(x, topY, 0.05),
+      new THREE.Vector3(x, topY, roofZ),
       new THREE.Vector3(0, 1, 0),
       FAN_STATE.EXHAUST,
     ),
@@ -56,7 +59,7 @@ const fanSlots = [
   // Rear exhaust
   makeFan(
     "Rear",
-    new THREE.Vector3(leftX + 0.04, 0.08, backZ),
+    new THREE.Vector3(leftX + 0.06, 0.05, backZ),
     new THREE.Vector3(0, 0, -1),
     FAN_STATE.EXHAUST,
   ),

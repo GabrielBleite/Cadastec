@@ -4,18 +4,20 @@ import { Fan } from "./Fan.js";
 
 const glassMaterial = new THREE.MeshPhysicalMaterial({
   color: 0x8db4ff,
-  roughness: 0.1,
-  metalness: 0,
-  opacity: 0.16,
+  roughness: 0.05,
+  metalness: 0.05,
+  opacity: 0.18,
   transparent: true,
-  transmission: 0.9,
-  thickness: 0.004,
+  transmission: 0.92,
+  clearcoat: 0.6,
+  clearcoatRoughness: 0.1,
+  thickness: 0.005,
 });
 
 const opaqueMaterial = new THREE.MeshStandardMaterial({
-  color: 0x0f121a,
-  roughness: 0.65,
-  metalness: 0.45,
+  color: 0x0b0f16,
+  roughness: 0.55,
+  metalness: 0.55,
 });
 
 export class CaseBuilder {
@@ -33,6 +35,7 @@ export class CaseBuilder {
     this.buildShell();
     this.buildFans();
     this.buildObstacles();
+    this.addAccentLighting();
     return this.group;
   }
 
@@ -65,11 +68,20 @@ export class CaseBuilder {
       this.group.add(mesh);
     });
 
-    const edges = new THREE.EdgesGeometry(
-      new THREE.BoxGeometry(width, height, depth, 1, 1, 1),
+    const edges = new THREE.EdgesGeometry(new THREE.BoxGeometry(width, height, depth, 1, 1, 1));
+    const edgeLines = new THREE.LineSegments(
+      edges,
+      new THREE.LineBasicMaterial({ color: 0x2f3950, linewidth: 2, transparent: true, opacity: 0.6 }),
     );
-    const edgeLines = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x2c3345, linewidth: 2 }));
     this.group.add(edgeLines);
+
+    const floorPad = new THREE.Mesh(
+      new THREE.BoxGeometry(width - wall * 2.2, wall * 0.8, depth - wall * 2.2),
+      new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.7, metalness: 0.35 }),
+    );
+    floorPad.position.set(0, this.boundingBox.min.y + wall * 0.4, 0);
+    floorPad.receiveShadow = true;
+    this.group.add(floorPad);
 
     this.boundingBox = new THREE.Box3(
       new THREE.Vector3(-half.x, -half.y, -half.z),
@@ -120,5 +132,13 @@ export class CaseBuilder {
       this.group.add(mesh);
       return mesh;
     });
+  }
+
+  addAccentLighting() {
+    const strip = new THREE.RectAreaLight(0x5bb3ff, 2.4, this.caseSpec.dimensions.width * 0.6, 0.02);
+    strip.position.set(this.caseSpec.dimensions.width * 0.15, this.caseSpec.dimensions.height * 0.35, this.caseSpec.dimensions.depth / 2 - 0.04);
+    strip.rotation.x = -Math.PI / 2;
+    strip.rotation.z = -Math.PI / 8;
+    this.group.add(strip);
   }
 }

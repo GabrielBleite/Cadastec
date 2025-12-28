@@ -92,9 +92,9 @@ export class ParticleSystem {
 
   _spawnPosition() {
     const base = this.emitter.position.clone();
-    base.x += (Math.random() - 0.5) * 0.05;
-    base.y += (Math.random() - 0.5) * 0.05;
-    base.z += (Math.random() - 0.5) * 0.05;
+    base.x += (Math.random() - 0.5) * 0.12;
+    base.y += (Math.random() - 0.5) * 0.06;
+    base.z += (Math.random() - 0.5) * 0.12;
     return base;
   }
 
@@ -214,8 +214,11 @@ export class ParticleSystem {
     const coord = pos.getComponent(idx);
 
     if (coord > max) {
-      const t = (max - coordPrev) / (coord - coordPrev);
-      const crossPoint = prev.clone().lerp(pos, t);
+      const denom = coord - coordPrev;
+      const t = Math.abs(denom) < 1e-5 ? 0 : (max - coordPrev) / denom;
+      const crossPoint = prev.clone();
+      crossPoint.setComponent(idx, max);
+      if (t >= 0 && t <= 1) crossPoint.lerp(pos, t);
       const entering = coordPrev > max;
       const allowed = this._onOpening(posKey, crossPoint, entering ? "in" : "out");
       if (allowed) {
@@ -226,8 +229,11 @@ export class ParticleSystem {
         vel.multiplyScalar(0.92);
       }
     } else if (coord < min) {
-      const t = (min - coordPrev) / (coord - coordPrev);
-      const crossPoint = prev.clone().lerp(pos, t);
+      const denom = coord - coordPrev;
+      const t = Math.abs(denom) < 1e-5 ? 0 : (min - coordPrev) / denom;
+      const crossPoint = prev.clone();
+      crossPoint.setComponent(idx, min);
+      if (t >= 0 && t <= 1) crossPoint.lerp(pos, t);
       const entering = coordPrev < min;
       const allowed = this._onOpening(negKey, crossPoint, entering ? "in" : "out");
       if (allowed) {
