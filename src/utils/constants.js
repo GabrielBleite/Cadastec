@@ -1,4 +1,4 @@
-import * as THREE from "./threeLoader.js";
+import { THREE } from "./threeLoader.js";
 
 export const FAN_STATE = {
   INTAKE: "INTAKE",

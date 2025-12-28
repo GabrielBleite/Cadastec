@@ -1,4 +1,4 @@
-import * as THREE from "../utils/threeLoader.js";
+import { THREE } from "../utils/threeLoader.js";
 
 export class SmokeMachine {
   constructor(offsetX = 0.6, height = 0.18) {

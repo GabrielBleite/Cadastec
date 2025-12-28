@@ -1,4 +1,4 @@
-import * as THREE from "../utils/threeLoader.js";
+import { THREE } from "../utils/threeLoader.js";
 import { FAN_STATE } from "../utils/constants.js";
 
 const width = 0.46;

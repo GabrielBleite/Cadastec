@@ -1,5 +1,4 @@
-import * as THREE from "./utils/threeLoader.js";
-import { OrbitControls } from "./utils/threeLoader.js";
+import { THREE, OrbitControls } from "./utils/threeLoader.js";
 import { CaseRegistry } from "./cases/CaseRegistry.js";
 import { CaseBuilder } from "./scene/CaseBuilder.js";
 import { SmokeMachine } from "./scene/SmokeMachine.js";

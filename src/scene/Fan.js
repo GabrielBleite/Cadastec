@@ -1,4 +1,4 @@
-import * as THREE from "../utils/threeLoader.js";
+import { THREE } from "../utils/threeLoader.js";
 import { FAN_STATE, FAN_COLORS, FAN_INFLUENCE_RADIUS, FAN_OPENING_RADIUS } from "../utils/constants.js";
 
 const fanThickness = 0.035;

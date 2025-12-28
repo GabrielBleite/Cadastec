@@ -1,4 +1,4 @@
-import * as THREE from "../utils/threeLoader.js";
+import { THREE } from "../utils/threeLoader.js";
 import { CASE_WALL_THICKNESS } from "../utils/constants.js";
 import { Fan } from "./Fan.js";
 

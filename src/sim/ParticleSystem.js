@@ -1,4 +1,4 @@
-import * as THREE from "../utils/threeLoader.js";
+import { THREE } from "../utils/threeLoader.js";
 import {
   BASE_FLOW,
   FAN_STATE,
