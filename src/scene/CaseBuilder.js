@@ -75,14 +75,6 @@ export class CaseBuilder {
     );
     this.group.add(edgeLines);
 
-    const floorPad = new THREE.Mesh(
-      new THREE.BoxGeometry(width - wall * 2.2, wall * 0.8, depth - wall * 2.2),
-      new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.7, metalness: 0.35 }),
-    );
-    floorPad.position.set(0, this.boundingBox.min.y + wall * 0.4, 0);
-    floorPad.receiveShadow = true;
-    this.group.add(floorPad);
-
     this.boundingBox = new THREE.Box3(
       new THREE.Vector3(-half.x, -half.y, -half.z),
       new THREE.Vector3(half.x, half.y, half.z),
@@ -91,6 +83,14 @@ export class CaseBuilder {
       this.boundingBox.min.clone().addScalar(wall),
       this.boundingBox.max.clone().addScalar(-wall),
     );
+
+    const floorPad = new THREE.Mesh(
+      new THREE.BoxGeometry(width - wall * 2.2, wall * 0.8, depth - wall * 2.2),
+      new THREE.MeshStandardMaterial({ color: 0x111827, roughness: 0.7, metalness: 0.35 }),
+    );
+    floorPad.position.set(0, this.boundingBox.min.y + wall * 0.4, 0);
+    floorPad.receiveShadow = true;
+    this.group.add(floorPad);
   }
 
   buildFans() {
